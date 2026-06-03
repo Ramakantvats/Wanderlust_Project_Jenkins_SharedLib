@@ -9,7 +9,7 @@ def call(String SonarQubeAPI, String Projectname, String ProjectKey){
               ↓
 //2. Run sonar-scanner on your source code
               ↓
-//3. Upload analysis results to SonarQube dashboard. And sonarqube dashboard shows total bugs, vulneurabilities.
+//3. Upload analysis results to SonarQube server. And sonarqube dashboard shows total bugs, vulneurabilities.
 
 //Note: HOw sonar-scanner will find the code to scan?
 //As in starting jenkins stages we will clone the code in current workspace. So it will scan the current workspace code.
