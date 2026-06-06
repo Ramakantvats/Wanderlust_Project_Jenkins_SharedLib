@@ -4,8 +4,15 @@
 // }
 
 def call(){
-    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
-        dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'OWASP'
+    withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
+        catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+            dependencyCheck additionalArguments: """
+                --scan ./
+                --nvdApiKey ${NVD_API_KEY}
+                --format XML
+                --prettyPrint
+            """, odcInstallation: 'OWASP'
+        }
     }
     dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
 }
